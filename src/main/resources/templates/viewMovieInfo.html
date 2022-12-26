@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie Info</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="item" th:text="${movie.movieNm}"></div>
+    <img id="imgId" th:src="${movie.image}"/>
+    <div class="item" th:text="${movie.openDt}"></div>
+    <div class="item" th:text="${movie.genreNm}"></div>
+    <div class="item" th:text="${movie.directors}"></div>
+    <div class="item" th:text="${movie.actors}"></div>
+
+    <div class="star-rating">
+        <input type="radio" id="5-stars" name="rating" value="5" />
+        <label for="5-stars" class="star">&#9733;</label>
+        <input type="radio" id="4-stars" name="rating" value="4" />
+        <label for="4-stars" class="star">&#9733;</label>
+        <input type="radio" id="3-stars" name="rating" value="3" />
+        <label for="3-stars" class="star">&#9733;</label>
+        <input type="radio" id="2-stars" name="rating" value="2" />
+        <label for="2-stars" class="star">&#9733;</label>
+        <input type="radio" id="1-star" name="rating" value="1" />
+        <label for="1-star" class="star">&#9733;</label>
+    </div>
+
+    <div>
+    <textarea class="col-auto form-control" type="text" id="reviewContents"
+              placeholder="감상평을 남겨주시면 Cocolo에 큰 힘이 됩니다!"></textarea>
+    </div>
+</body>
+</html>

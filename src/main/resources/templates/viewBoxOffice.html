@@ -3,14 +3,16 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Grid</title>
+    <title>Box Office</title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 <div class="container">
     <div th:each="movie : ${dailyBoxOfficeArr}">
         <div class="item" th:text="${movie.movieNm}"></div>
-        <img id="imgId" th:src="${movie.image}"/>
+        <a th:href="@{/viewMovieInfo(movieCd = ${movie.movieCd})}">
+            <img id="imgId" th:src="${movie.image}"/>
+        </a>
     </div>
 </div>
 </body>
