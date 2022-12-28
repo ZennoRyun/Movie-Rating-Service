@@ -1,11 +1,10 @@
 package com.example.movierating.api;
 
-import com.example.movierating.Movie;
+import com.example.movierating.entity.MovieEntity;
 import kr.or.kobis.kobisopenapi.consumer.rest.KobisOpenAPIRestService;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -34,15 +33,15 @@ public class MovieInfoAPI {
         JSONObject object = (JSONObject) parser.parse(dailyResponse);
         JSONObject boxOfficeResult = (JSONObject) object.get("boxOfficeResult");
         JSONArray dailyBoxOfficeArr = (JSONArray) boxOfficeResult.get("dailyBoxOfficeList");
-        ArrayList<Movie> movieList = new ArrayList<>();
+        ArrayList<MovieEntity> movieList = new ArrayList<>();
         for(int i=0;i<dailyBoxOfficeArr.size();i++) {
             object = (JSONObject) dailyBoxOfficeArr.get(i);
-            Movie movie = getMovieInfo((String) object.get("movieCd"));
+            MovieEntity movie = getMovieInfo((String) object.get("movieCd"));
             movieList.add(movie);
         }
         return movieList;
     }
-    public Movie getMovieInfo(String movieCd) throws Exception {
+    public MovieEntity getMovieInfo(String movieCd) throws Exception {
         String directors = "";
         String actors = "";
         JSONParser parser = new JSONParser();
@@ -79,7 +78,16 @@ public class MovieInfoAPI {
         NaverMovieSearchAPI naverMovieSearchAPI = new NaverMovieSearchAPI();
         String image = naverMovieSearchAPI.search((String) object.get("movieNm"));
 
-        Movie movie = new Movie((String) object.get("movieCd"), (String) object.get("movieNm"), (String) object.get("openDt"), (String) object2.get("genreNm"), directors, actors, image);
+        //MovieEntity movie = new MovieEntity((String) object.get("movieCd"), (String) object.get("movieNm"), (String) object.get("openDt"), (String) object2.get("genreNm"), directors, actors, image);
+        MovieEntity movie = MovieEntity.builder()
+                .movieCd((String) object.get("movieCd"))
+                .movieNm((String) object.get("movieNm"))
+                .openDt((String) object.get("openDt"))
+                .genreNm((String) object2.get("genreNm"))
+                .directors(directors)
+                .actors(actors)
+                .image(image)
+                .build();
         return movie;
     }
 }
