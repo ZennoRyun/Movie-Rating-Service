@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Slf4j
 @Controller
@@ -29,29 +30,28 @@ public class MovieController {
         return "main";
     }
 
-    @GetMapping("viewBoxOffice")
-    public String viewBoxOffice(Model model) throws Exception {
-        MovieInfoAPI movieInfoAPI = new MovieInfoAPI();
-        model.addAttribute("dailyBoxOfficeArr", movieInfoAPI.getBoxOffice());
-
-        return "viewBoxOffice";
-    }
-
     @GetMapping("viewMovieInfo")
     public String viewMovieInfo(@RequestParam String movieCd, Model model) throws Exception {
-        MovieInfoAPI movieInfoAPI = new MovieInfoAPI();
-        MovieDTO dto = MovieDTO.builder()
-                .movieCd(movieInfoAPI.getMovieInfo(movieCd).getMovieCd())
-                .movieNm(movieInfoAPI.getMovieInfo(movieCd).getMovieNm())
-                .openDt(movieInfoAPI.getMovieInfo(movieCd).getOpenDt())
-                .genreNm(movieInfoAPI.getMovieInfo(movieCd).getGenreNm())
-                .directors(movieInfoAPI.getMovieInfo(movieCd).getDirectors())
-                .actors(movieInfoAPI.getMovieInfo(movieCd).getActors())
-                .image(movieInfoAPI.getMovieInfo(movieCd).getImage())
-                .build();
-        MovieEntity entity = MovieDTO.toEntity(dto);
-        movieService.movieCreate(entity);
-        model.addAttribute("movie", movieInfoAPI.getMovieInfo(movieCd));
+        Optional<MovieEntity> movieEntity = movieService.retrieve(movieCd);
+        if(movieEntity.isEmpty()) {
+            MovieInfoAPI movieInfoAPI = new MovieInfoAPI();
+            MovieEntity movie = movieInfoAPI.getMovieInfo(movieCd);
+            MovieDTO dto = MovieDTO.builder()
+                    .movieCd(movie.getMovieCd())
+                    .movieNm(movie.getMovieNm())
+                    .openDt(movie.getOpenDt())
+                    .genreNm(movie.getGenreNm())
+                    .directors(movie.getDirectors())
+                    .actors(movie.getActors())
+                    .image(movie.getImage())
+                    .build();
+            MovieEntity entity = MovieDTO.toEntity(dto);
+            movieService.movieCreate(entity);
+            model.addAttribute("movie", entity);
+        }
+        else {
+            model.addAttribute("movie", movieEntity.get());
+        }
         return "viewMovieInfo";
     }
     /*@PostMapping("viewMovieInfo")

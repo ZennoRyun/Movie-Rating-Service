@@ -78,7 +78,6 @@ public class MovieInfoAPI {
         NaverMovieSearchAPI naverMovieSearchAPI = new NaverMovieSearchAPI();
         String image = naverMovieSearchAPI.search((String) object.get("movieNm"));
 
-        //MovieEntity movie = new MovieEntity((String) object.get("movieCd"), (String) object.get("movieNm"), (String) object.get("openDt"), (String) object2.get("genreNm"), directors, actors, image);
         MovieEntity movie = MovieEntity.builder()
                 .movieCd((String) object.get("movieCd"))
                 .movieNm((String) object.get("movieNm"))

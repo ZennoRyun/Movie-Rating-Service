@@ -9,8 +9,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -36,5 +39,13 @@ public class BoxOfficeController {
             BoxOfficeEntity entity = BoxOfficeDTO.toEntity(dto);
             boxOfficeService.createBoxOffice(entity);
         }
+    }
+
+    @GetMapping("viewBoxOffice")
+    public String viewBoxOffice(Model model) throws Exception {
+        List<BoxOfficeEntity> movieList = boxOfficeService.retrieveAll();
+        model.addAttribute("dailyBoxOfficeArr", movieList);
+
+        return "viewBoxOffice";
     }
 }
