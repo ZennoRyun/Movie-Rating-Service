@@ -38,7 +38,6 @@ public class MovieDTO {
                 .directors(dto.getDirectors())
                 .actors(dto.getActors())
                 .image(dto.getImage())
-                .rate(dto.getRate())
                 .build();
     }
 }

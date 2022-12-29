@@ -1,16 +1,21 @@
 package com.example.movierating.controller;
 
 import com.example.movierating.api.MovieInfoAPI;
+import com.example.movierating.dto.BoxOfficeDTO;
 import com.example.movierating.dto.MovieDTO;
 import com.example.movierating.dto.ResponseDTO;
+import com.example.movierating.entity.BoxOfficeEntity;
 import com.example.movierating.entity.MovieEntity;
 import com.example.movierating.service.MovieService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 @Slf4j
 @Controller
@@ -35,7 +40,7 @@ public class MovieController {
     @GetMapping("viewMovieInfo")
     public String viewMovieInfo(@RequestParam String movieCd, Model model) throws Exception {
         MovieInfoAPI movieInfoAPI = new MovieInfoAPI();
-        MovieEntity movieEntity = MovieEntity.builder()
+        MovieDTO dto = MovieDTO.builder()
                 .movieCd(movieInfoAPI.getMovieInfo(movieCd).getMovieCd())
                 .movieNm(movieInfoAPI.getMovieInfo(movieCd).getMovieNm())
                 .openDt(movieInfoAPI.getMovieInfo(movieCd).getOpenDt())
@@ -44,7 +49,8 @@ public class MovieController {
                 .actors(movieInfoAPI.getMovieInfo(movieCd).getActors())
                 .image(movieInfoAPI.getMovieInfo(movieCd).getImage())
                 .build();
-        movieService.movieCreate(movieEntity);
+        MovieEntity entity = MovieDTO.toEntity(dto);
+        movieService.movieCreate(entity);
         model.addAttribute("movie", movieInfoAPI.getMovieInfo(movieCd));
         return "viewMovieInfo";
     }

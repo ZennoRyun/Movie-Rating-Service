@@ -1,28 +1,29 @@
 package com.example.movierating.service;
 
 import com.example.movierating.entity.BoxOfficeEntity;
-import com.example.movierating.entity.MovieEntity;
-import com.example.movierating.persistence.MovieRepository;
+import com.example.movierating.persistence.BoxOfficeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.List;
 @Slf4j
 @Service
-public class MovieService {
-    @Autowired
-    private MovieRepository movieRepository;
+public class BoxOfficeService {
 
-    public MovieEntity movieCreate(final MovieEntity entity) {
+    @Autowired
+    private BoxOfficeRepository boxOfficeRepository;
+
+    public BoxOfficeEntity createBoxOffice(final BoxOfficeEntity entity) {
         validate(entity);
         log.info("Entity Cd : {} is saved.", entity.getMovieCd());
 
-        return movieRepository.save(entity);
+        return boxOfficeRepository.save(entity);
     }
 
-    private void validate(final MovieEntity entity) {
+    public void deleteBoxOffice() {
+        boxOfficeRepository.deleteAll();
+    }
+    private void validate(final BoxOfficeEntity entity) {
         if(entity == null) {
             log.warn("Entity cannot be null.");
             throw new RuntimeException("Entity cannot be null.");
