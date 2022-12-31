@@ -1,7 +1,6 @@
 package com.example.movierating.dto;
 
 import com.example.movierating.entity.BoxOfficeEntity;
-import com.example.movierating.entity.MovieEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
