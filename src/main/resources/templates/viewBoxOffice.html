@@ -10,7 +10,7 @@
 <div class="container">
     <div th:each="movie : ${dailyBoxOfficeArr}">
         <div class="item" th:text="${movie.movieNm}"></div>
-        <a th:href="@{/viewMovieInfo(movieCd = ${movie.movieCd})}">
+        <a th:href="@{/movie/viewMovieInfo(movieCd = ${movie.movieCd})}">
             <img id="imgId" th:src="${movie.image}"/>
         </a>
     </div>

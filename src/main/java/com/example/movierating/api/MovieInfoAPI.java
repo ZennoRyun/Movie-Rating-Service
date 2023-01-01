@@ -1,5 +1,6 @@
 package com.example.movierating.api;
 
+import com.example.movierating.dto.MovieDTO;
 import com.example.movierating.entity.MovieEntity;
 import kr.or.kobis.kobisopenapi.consumer.rest.KobisOpenAPIRestService;
 import org.json.simple.JSONArray;
@@ -32,15 +33,15 @@ public class MovieInfoAPI {
         JSONObject object = (JSONObject) parser.parse(dailyResponse);
         JSONObject boxOfficeResult = (JSONObject) object.get("boxOfficeResult");
         JSONArray dailyBoxOfficeArr = (JSONArray) boxOfficeResult.get("dailyBoxOfficeList");
-        ArrayList<MovieEntity> movieList = new ArrayList<>();
+        ArrayList<MovieDTO> movieList = new ArrayList<>();
         for(int i=0;i<dailyBoxOfficeArr.size();i++) {
             object = (JSONObject) dailyBoxOfficeArr.get(i);
-            MovieEntity movie = getMovieInfo((String) object.get("movieCd"));
+            MovieDTO movie = getMovieInfo((String) object.get("movieCd"));
             movieList.add(movie);
         }
         return movieList;
     }
-    public MovieEntity getMovieInfo(String movieCd) throws Exception {
+    public MovieDTO getMovieInfo(String movieCd) throws Exception {
         String directors = "";
         String actors = "";
         JSONParser parser = new JSONParser();
@@ -77,7 +78,7 @@ public class MovieInfoAPI {
         NaverMovieSearchAPI naverMovieSearchAPI = new NaverMovieSearchAPI();
         String image = naverMovieSearchAPI.search((String) object.get("movieNm"));
 
-        MovieEntity movie = MovieEntity.builder()
+        MovieDTO movie = MovieDTO.builder()
                 .movieCd((String) object.get("movieCd"))
                 .movieNm((String) object.get("movieNm"))
                 .openDt((String) object.get("openDt"))

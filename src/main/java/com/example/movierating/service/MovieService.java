@@ -13,7 +13,7 @@ public class MovieService {
     @Autowired
     private MovieRepository movieRepository;
 
-    public void movieCreate(final MovieEntity entity) {
+    public void createMovie(final MovieEntity entity) {
         validate(entity);
         log.info("Entity Cd : {} is saved.", entity.getMovieCd());
         movieRepository.save(entity);

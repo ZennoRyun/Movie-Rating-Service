@@ -14,7 +14,7 @@
     <div class="item" th:text="${movie.directors}"></div>
     <div class="item" th:text="${movie.actors}"></div>
 
-    <form th:action="@{/write}"  th:object="${movie}" method="post" >
+    <form th:action="@{/review/registerReview}" th:object="${movie}" method="post" >
         <div class="starpoint_wrap">
             <div class="starpoint_box">
                 <label for="starpoint_1" class="label_star" title="0.5"><span class="blind">0.5점</span></label>
@@ -27,25 +27,24 @@
                 <label for="starpoint_8" class="label_star" title="4"><span class="blind">4점</span></label>
                 <label for="starpoint_9" class="label_star" title="4.5"><span class="blind">4.5점</span></label>
                 <label for="starpoint_10" class="label_star" title="5"><span class="blind">5점</span></label>
-                <input type="radio" th:field="*{rate}" name="starpoint" id="starpoint_1" class="star_radio" value="0.5">
-                <input type="radio" th:field="*{rate}" name="starpoint" id="starpoint_2" class="star_radio" value="1.0">
-                <input type="radio" th:field="*{rate}" name="starpoint" id="starpoint_3" class="star_radio" value="1.5">
-                <input type="radio" th:field="*{rate}" name="starpoint" id="starpoint_4" class="star_radio" value="2.0">
-                <input type="radio" th:field="*{rate}" name="starpoint" id="starpoint_5" class="star_radio" value="2.5">
-                <input type="radio" th:field="*{rate}" name="starpoint" id="starpoint_6" class="star_radio" value="3.0">
-                <input type="radio" th:field="*{rate}" name="starpoint" id="starpoint_7" class="star_radio" value="3.5">
-                <input type="radio" th:field="*{rate}" name="starpoint" id="starpoint_8" class="star_radio" value="4.0">
-                <input type="radio" th:field="*{rate}" name="starpoint" id="starpoint_9" class="star_radio" value="4.5">
-                <input type="radio" th:field="*{rate}" name="starpoint" id="starpoint_10" class="star_radio" value="5.0">
+                <input type="radio" th:field="*{rate}" name="starpoint" id="starpoint_1" class="star_radio" value="0.5"/>
+                <input type="radio" th:field="*{rate}" name="starpoint" id="starpoint_2" class="star_radio" value="1.0"/>
+                <input type="radio" th:field="*{rate}" name="starpoint" id="starpoint_3" class="star_radio" value="1.5"/>
+                <input type="radio" th:field="*{rate}" name="starpoint" id="starpoint_4" class="star_radio" value="2.0"/>
+                <input type="radio" th:field="*{rate}" name="starpoint" id="starpoint_5" class="star_radio" value="2.5"/>
+                <input type="radio" th:field="*{rate}" name="starpoint" id="starpoint_6" class="star_radio" value="3.0"/>
+                <input type="radio" th:field="*{rate}" name="starpoint" id="starpoint_7" class="star_radio" value="3.5"/>
+                <input type="radio" th:field="*{rate}" name="starpoint" id="starpoint_8" class="star_radio" value="4.0"/>
+                <input type="radio" th:field="*{rate}" name="starpoint" id="starpoint_9" class="star_radio" value="4.5"/>
+                <input type="radio" th:field="*{rate}" name="starpoint" id="starpoint_10" class="star_radio" value="5.0"/>
                 <span class="starpoint_bg"></span>
             </div>
         </div>
-        <button type="submit">등록</button>
+        <div>
+            <textarea name="content" id="content" cols="30" rows="10" th:text="${content}" placeholder="내용"></textarea>
+            <input type="hidden" id="movieCd" name="movieCd" th:value="${movie.movieCd}"/>
+            <button type="submit">등록</button>
+        </div>
     </form>
-
-    <div>
-    <textarea class="col-auto form-control" type="text" id="reviewContents"
-              placeholder="감상평을 남겨주시면 Cocolo에 큰 힘이 됩니다!"></textarea>
-    </div>
 </body>
 </html>

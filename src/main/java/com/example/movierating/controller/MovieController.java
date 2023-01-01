@@ -13,33 +13,20 @@ import java.util.Optional;
 
 @Slf4j
 @Controller
+@RequestMapping("movie")
 public class MovieController {
 
     @Autowired
     private MovieService movieService;
 
-    @GetMapping
-    public String main(){
-        return "main";
-    }
-
-    @GetMapping("viewMovieInfo")
+    @GetMapping("/viewMovieInfo")
     public String viewMovieInfo(@RequestParam String movieCd, Model model) throws Exception {
         Optional<MovieEntity> movieEntity = movieService.retrieve(movieCd);
         if(movieEntity.isEmpty()) {
             MovieInfoAPI movieInfoAPI = new MovieInfoAPI();
-            MovieEntity movie = movieInfoAPI.getMovieInfo(movieCd);
-            MovieDTO dto = MovieDTO.builder()
-                    .movieCd(movie.getMovieCd())
-                    .movieNm(movie.getMovieNm())
-                    .openDt(movie.getOpenDt())
-                    .genreNm(movie.getGenreNm())
-                    .directors(movie.getDirectors())
-                    .actors(movie.getActors())
-                    .image(movie.getImage())
-                    .build();
+            MovieDTO dto = movieInfoAPI.getMovieInfo(movieCd);
             MovieEntity entity = MovieDTO.toEntity(dto);
-            movieService.movieCreate(entity);
+            movieService.createMovie(entity);
             model.addAttribute("movie", entity);
         }
         else {

@@ -29,6 +29,7 @@ public class MovieDTO {
         this.image = entity.getImage();
         this.rate = entity.getRate();
     }
+
     public static MovieEntity toEntity(final MovieDTO dto) {
         return MovieEntity.builder()
                 .movieCd(dto.getMovieCd())
