@@ -15,7 +15,6 @@ import org.springframework.web.servlet.view.RedirectView;
 @Controller
 @RequestMapping("review")
 public class ReviewController {
-
     @Autowired
     private ReviewService reviewService;
 

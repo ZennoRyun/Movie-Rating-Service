@@ -1,5 +1,6 @@
 package com.example.movierating.api;
 
+import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -10,10 +11,11 @@ import java.net.*;
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 @Component
 public class NaverMovieSearchAPI {
 
-    public String search(String query) throws ParseException {
+    public String search(String query, String prdtYear) throws ParseException {
         try { // 검색어 인코딩
             query = URLEncoder.encode(query, "UTF-8");
         } catch (UnsupportedEncodingException e) {
@@ -25,10 +27,20 @@ public class NaverMovieSearchAPI {
         requestHeaders.put("X-Naver-Client-Id", "dPLQ0H0Y4xXS9xSTlDMu");
         requestHeaders.put("X-Naver-Client-Secret", "PXTQZUHRYs");
         String responseBody = get(apiURL,requestHeaders);
+        log.info(prdtYear);
+        log.info(responseBody);
         JSONParser parser = new JSONParser();
         JSONObject obj = (JSONObject)parser.parse(responseBody);
         JSONArray item = (JSONArray)obj.get("items");
-        JSONObject tmp = (JSONObject)item.get(0);
+        JSONObject tmp = new JSONObject();
+        for(int i=0;i<item.size();i++) {
+            tmp = (JSONObject) item.get(i);
+            if(prdtYear.equals(tmp.get("pubDate"))) {
+                break;
+            } else {
+                tmp = (JSONObject) item.get(0);
+            }
+        }
         String image = (String)tmp.get("image");
         return image;
     }
