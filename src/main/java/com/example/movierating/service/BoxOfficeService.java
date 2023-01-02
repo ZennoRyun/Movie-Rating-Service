@@ -28,6 +28,7 @@ public class BoxOfficeService {
     public List<BoxOfficeEntity> retrieveAll() {
         return boxOfficeRepository.findAll(Sort.by(Sort.Direction.ASC, "ranking"));
     }
+
     private void validate(final BoxOfficeEntity entity) {
         if(entity == null) {
             log.warn("Entity cannot be null.");

@@ -4,7 +4,6 @@ import com.example.movierating.api.MovieInfoAPI;
 import com.example.movierating.dto.BoxOfficeDTO;
 import com.example.movierating.dto.MovieDTO;
 import com.example.movierating.entity.BoxOfficeEntity;
-import com.example.movierating.entity.MovieEntity;
 import com.example.movierating.service.BoxOfficeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,7 @@ public class BoxOfficeController {
     @Autowired
     private BoxOfficeService boxOfficeService;
 
-    @Scheduled(cron = "0 56 13 * * ?", zone = "Asia/Seoul") // 매일 오전 10시
+    @Scheduled(cron = "0 0 10 * * ?", zone = "Asia/Seoul") // 매일 오전 10시
     public void getBoxOffice() throws Exception {
         long now = System.currentTimeMillis() / 1000;
         log.info("schedule tasks using cron jobs - {}", now);

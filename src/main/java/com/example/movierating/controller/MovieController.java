@@ -30,6 +30,7 @@ public class MovieController {
             model.addAttribute("movie", entity);
         }
         else {
+            movieEntity.get().setRate(Math.round(movieEntity.get().getRate()*100)/100.0);
             model.addAttribute("movie", movieEntity.get());
         }
         return "viewMovieInfo";

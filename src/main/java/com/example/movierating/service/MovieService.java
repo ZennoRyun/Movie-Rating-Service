@@ -23,6 +23,10 @@ public class MovieService {
         return movieRepository.findById(movieCd);
     }
 
+    public void updateRate(String movieCd, Double rate) {
+        movieRepository.updateRate(movieCd, rate);
+    }
+
     private void validate(final MovieEntity entity) {
         if(entity == null) {
             log.warn("Entity cannot be null.");

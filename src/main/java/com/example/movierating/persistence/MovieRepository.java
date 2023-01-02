@@ -2,12 +2,17 @@ package com.example.movierating.persistence;
 
 import com.example.movierating.entity.MovieEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import javax.transaction.Transactional;
 
 @Repository
 public interface MovieRepository extends JpaRepository<MovieEntity, String> {
-    //List<MovieEntity> findByMovieCd(String movieCd);
-    /*@Query(value = "SELECT RATE FROM MOVIE WHERE movicCd = :movieCd", nativeQuery = true)
-    Double findRate(String movieCd);*/
 
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE MOVIE SET RATE = :rate WHERE MOVIE_CD = :movieCd", nativeQuery = true)
+    void updateRate(@Param("movieCd") String movieCd, @Param("rate") Double rate);
 }

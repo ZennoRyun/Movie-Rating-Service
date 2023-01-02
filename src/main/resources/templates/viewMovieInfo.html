@@ -13,6 +13,7 @@
     <div class="item" th:text="${movie.genreNm}"></div>
     <div class="item" th:text="${movie.directors}"></div>
     <div class="item" th:text="${movie.actors}"></div>
+    <div class="item" th:text="${movie.rate}"></div>
 
     <form th:action="@{/review/registerReview}" th:object="${movie}" method="post" >
         <div class="starpoint_wrap">

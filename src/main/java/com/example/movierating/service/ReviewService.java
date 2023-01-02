@@ -1,6 +1,5 @@
 package com.example.movierating.service;
 
-import com.example.movierating.entity.MovieEntity;
 import com.example.movierating.entity.ReviewEntity;
 import com.example.movierating.persistence.ReviewRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +16,10 @@ public class ReviewService {
     public void registerReview(ReviewEntity entity) {
         log.info("Entity Cd : {} is saved.", entity.getId());
         reviewRepository.save(entity);
+    }
+
+    public Double retrieveRateAvg(String movieCd) {
+        return reviewRepository.retrieveRateAvg(movieCd);
     }
 
 

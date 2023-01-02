@@ -1,7 +1,6 @@
 package com.example.movierating.api;
 
 import com.example.movierating.dto.MovieDTO;
-import com.example.movierating.entity.MovieEntity;
 import kr.or.kobis.kobisopenapi.consumer.rest.KobisOpenAPIRestService;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
