@@ -27,8 +27,6 @@ public class NaverMovieSearchAPI {
         requestHeaders.put("X-Naver-Client-Id", "dPLQ0H0Y4xXS9xSTlDMu");
         requestHeaders.put("X-Naver-Client-Secret", "PXTQZUHRYs");
         String responseBody = get(apiURL,requestHeaders);
-        log.info(prdtYear);
-        log.info(responseBody);
         JSONParser parser = new JSONParser();
         JSONObject obj = (JSONObject)parser.parse(responseBody);
         JSONArray item = (JSONArray)obj.get("items");

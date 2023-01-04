@@ -2,6 +2,7 @@ package com.example.movierating.api;
 
 import com.example.movierating.dto.MovieDTO;
 import kr.or.kobis.kobisopenapi.consumer.rest.KobisOpenAPIRestService;
+import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -9,12 +10,14 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+
+@Slf4j
 @Component
 public class MovieInfoAPI {
     //영화진흥원 API 발급키
     private KobisOpenAPIRestService service = new KobisOpenAPIRestService("4bec3d02a13bdfeaaa379dc98bd6e57d");
 
-    public ArrayList getBoxOffice() throws Exception {
+    public ArrayList<MovieDTO> getBoxOffice() throws Exception {
         LocalDateTime time = LocalDateTime.now().minusDays(1);
         String targetDt =  time.format(DateTimeFormatter.ofPattern("yyyMMdd"));
         //ROW 개수
@@ -38,8 +41,10 @@ public class MovieInfoAPI {
             MovieDTO movie = getMovieInfo((String) object.get("movieCd"));
             movieList.add(movie);
         }
+
         return movieList;
     }
+
     public MovieDTO getMovieInfo(String movieCd) throws Exception {
         String directors = "";
         String actors = "";
@@ -49,7 +54,10 @@ public class MovieInfoAPI {
         JSONObject movieInfoResult = (JSONObject) object.get("movieInfoResult");
         object = (JSONObject) movieInfoResult.get("movieInfo");
         JSONArray genresArr = (JSONArray) object.get("genres");
-        JSONObject object2 = (JSONObject) genresArr.get(0);
+        JSONObject object2 = new JSONObject();
+        if(genresArr.size()!=0) {
+            object2 = (JSONObject) genresArr.get(0);
+        }
         JSONArray directorsArr = (JSONArray) object.get("directors");
         for(int j=0;j<directorsArr.size();j++) {
             JSONObject object3 = (JSONObject) directorsArr.get(j);
@@ -75,15 +83,46 @@ public class MovieInfoAPI {
         NaverMovieSearchAPI naverMovieSearchAPI = new NaverMovieSearchAPI();
         String image = naverMovieSearchAPI.search((String) object.get("movieNm"), (String) object.get("prdtYear"));
 
-        MovieDTO movie = MovieDTO.builder()
-                .movieCd((String) object.get("movieCd"))
-                .movieNm((String) object.get("movieNm"))
-                .openDt((String) object.get("openDt"))
-                .genreNm((String) object2.get("genreNm"))
-                .directors(directors)
-                .actors(actors)
-                .image(image)
-                .build();
-        return movie;
+        if(genresArr.size()!=0) {
+            MovieDTO movie = MovieDTO.builder()
+                    .movieCd((String) object.get("movieCd"))
+                    .movieNm((String) object.get("movieNm"))
+                    .openDt((String) object.get("openDt"))
+                    .genreNm((String) object2.get("genreNm"))
+                    .directors(directors)
+                    .actors(actors)
+                    .image(image)
+                    .build();
+            return movie;
+        } else {
+            MovieDTO movie = MovieDTO.builder()
+                    .movieCd((String) object.get("movieCd"))
+                    .movieNm((String) object.get("movieNm"))
+                    .openDt((String) object.get("openDt"))
+                    .genreNm("정보 없음")
+                    .directors(directors)
+                    .actors(actors)
+                    .image(image)
+                    .build();
+            return movie;
+        }
+    }
+
+    public void searchMovie() throws Exception {
+        String[] movieTypeCd = new String[1];
+        movieTypeCd[0] = "220101";
+        String searchResponse = service.getMovieList(true, "", "30", "올빼미", "", "", "", "1960", "", "", movieTypeCd);
+        JSONParser parser = new JSONParser();
+        JSONObject object = (JSONObject) parser.parse(searchResponse);
+        JSONObject movieListResult = (JSONObject) object.get("movieListResult");
+        JSONArray movieArr = (JSONArray) movieListResult.get("movieList");
+        ArrayList<MovieDTO> movieList = new ArrayList<>();
+        for(int i=0;i<movieArr.size();i++) {
+            object = (JSONObject) movieArr.get(i);
+            MovieDTO movie = getMovieInfo((String) object.get("movieCd"));
+            movieList.add(movie);
+        }
+        log.info(String.valueOf(movieList));
+        //return movieList;
     }
 }

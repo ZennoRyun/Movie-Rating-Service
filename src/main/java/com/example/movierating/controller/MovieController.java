@@ -37,4 +37,11 @@ public class MovieController {
         }
         return "viewMovieInfo";
     }
+
+    @GetMapping("/searchMovie")
+    public String searchMovie() throws Exception {
+        MovieInfoAPI movieInfoAPI = new MovieInfoAPI();
+        movieInfoAPI.searchMovie();
+        return "main";
+    }
 }
