@@ -46,8 +46,10 @@ public class MovieInfoAPI {
     }
 
     public MovieDTO getMovieInfo(String movieCd) throws Exception {
+        String genreNm = "";
         String directors = "";
         String actors = "";
+
         JSONParser parser = new JSONParser();
         String movieResponse = service.getMovieInfo(true, movieCd);
         JSONObject object = (JSONObject) parser.parse(movieResponse);
@@ -57,14 +59,15 @@ public class MovieInfoAPI {
         JSONObject object2 = new JSONObject();
         if(genresArr.size()!=0) {
             object2 = (JSONObject) genresArr.get(0);
+            genreNm = (String) object2.get("genreNm");
         }
         JSONArray directorsArr = (JSONArray) object.get("directors");
         for(int j=0;j<directorsArr.size();j++) {
             JSONObject object3 = (JSONObject) directorsArr.get(j);
             if (j!=0) {
-                directors = directors + ", " + (String) object3.get("peopleNm");
+                directors = directors + ", " + object3.get("peopleNm");
             } else {
-                directors = directors + (String) object3.get("peopleNm");
+                directors = directors + object3.get("peopleNm");
             }
         }
         JSONArray actorsArr = (JSONArray) object.get("actors");
@@ -74,42 +77,31 @@ public class MovieInfoAPI {
             }
             JSONObject object3 = (JSONObject) actorsArr.get(j);
             if (j!=0) {
-                actors = actors + ", " + (String) object3.get("peopleNm");
+                actors = actors + ", " + object3.get("peopleNm");
             } else {
-                actors = actors + (String) object3.get("peopleNm");
+                actors = actors + object3.get("peopleNm");
             }
         }
         // 네이버 영화 검색 API로 이미지 주소 받아오기
         NaverMovieSearchAPI naverMovieSearchAPI = new NaverMovieSearchAPI();
         String image = naverMovieSearchAPI.search((String) object.get("movieNm"), (String) object.get("prdtYear"));
 
-        if(genresArr.size()!=0) {
-            MovieDTO movie = MovieDTO.builder()
-                    .movieCd((String) object.get("movieCd"))
-                    .movieNm((String) object.get("movieNm"))
-                    .openDt((String) object.get("openDt"))
-                    .genreNm((String) object2.get("genreNm"))
-                    .directors(directors)
-                    .actors(actors)
-                    .image(image)
-                    .build();
-            return movie;
-        } else {
-            MovieDTO movie = MovieDTO.builder()
-                    .movieCd((String) object.get("movieCd"))
-                    .movieNm((String) object.get("movieNm"))
-                    .openDt((String) object.get("openDt"))
-                    .genreNm("정보 없음")
-                    .directors(directors)
-                    .actors(actors)
-                    .image(image)
-                    .build();
-            return movie;
-        }
+        MovieDTO movie = MovieDTO.builder()
+                .movieCd((String) object.get("movieCd"))
+                .movieNm((String) object.get("movieNm"))
+                .openDt((String) object.get("openDt"))
+                .genreNm(genreNm)
+                .directors(directors)
+                .actors(actors)
+                .image(image)
+                .build();
+
+        return movie;
     }
 
     public void searchMovie() throws Exception {
         String[] movieTypeCd = new String[1];
+        // 장편 영화만 검색
         movieTypeCd[0] = "220101";
         String searchResponse = service.getMovieList(true, "", "30", "올빼미", "", "", "", "1960", "", "", movieTypeCd);
         JSONParser parser = new JSONParser();
