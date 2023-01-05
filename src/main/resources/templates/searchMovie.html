@@ -20,7 +20,7 @@
         <div th:each="movie : ${searchMovieList}">
             <div class="item" th:text="${movie.movieNm}"></div>
             <a th:href="@{/movie/viewMovieInfo(movieCd = ${movie.movieCd})}">
-                <img id="imgId" th:src="${movie.image}"/>
+                <img id="imgId" th:src="${movie.image}" height="230" width="160"/>
             </a>
         </div>
     </div>

@@ -10,6 +10,7 @@ import java.io.*;
 import java.net.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @Slf4j
 @Component
@@ -35,11 +36,12 @@ public class NaverMovieSearchAPI {
             tmp = (JSONObject) item.get(i);
             if(prdtYear.equals(tmp.get("pubDate"))) {
                 break;
-            } else {
-                tmp = (JSONObject) item.get(0);
             }
         }
         String image = (String)tmp.get("image");
+        if(Objects.equals(image, "")) {
+          image = "https://ssl.pstatic.net/static/movie/2012/06/dft_img203x290.png";
+        }
         return image;
     }
 
