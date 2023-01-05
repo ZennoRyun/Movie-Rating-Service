@@ -99,11 +99,11 @@ public class MovieInfoAPI {
         return movie;
     }
 
-    public void searchMovie() throws Exception {
+    public ArrayList<MovieDTO> searchMovie(String query, String query2) throws Exception {
         String[] movieTypeCd = new String[1];
         // 장편 영화만 검색
         movieTypeCd[0] = "220101";
-        String searchResponse = service.getMovieList(true, "", "30", "올빼미", "", "", "", "1960", "", "", movieTypeCd);
+        String searchResponse = service.getMovieList(true, "", "30", query, query2, "", "", "1960", "", "", movieTypeCd);
         JSONParser parser = new JSONParser();
         JSONObject object = (JSONObject) parser.parse(searchResponse);
         JSONObject movieListResult = (JSONObject) object.get("movieListResult");
@@ -114,7 +114,7 @@ public class MovieInfoAPI {
             MovieDTO movie = getMovieInfo((String) object.get("movieCd"));
             movieList.add(movie);
         }
-        log.info(String.valueOf(movieList));
-        //return movieList;
+
+        return movieList;
     }
 }

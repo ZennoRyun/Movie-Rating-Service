@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 @Slf4j
@@ -22,12 +23,14 @@ public class ReviewController {
     private MovieService movieService;
 
     @PostMapping("/registerReview")
-    public RedirectView registerReview(ReviewDTO dto) {
+    public RedirectView registerReview(ReviewDTO dto, RedirectAttributes re) {
         ReviewEntity entity = ReviewDTO.toEntity(dto);
         reviewService.registerReview(entity);
         String movieCd = dto.getMovieCd();
         Double rate = reviewService.retrieveRateAvg(movieCd);
         movieService.updateRate(movieCd, rate);
-        return new RedirectView("/");
+        re.addAttribute("movieCd", movieCd);
+
+        return new RedirectView("/movie/viewMovieInfo");
     }
 }

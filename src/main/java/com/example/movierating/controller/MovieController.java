@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.thymeleaf.util.StringUtils;
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Slf4j
@@ -35,13 +37,19 @@ public class MovieController {
             model.addAttribute("movie", movieEntity.get());
             model.addAttribute("review", reviewEntity);
         }
+
         return "viewMovieInfo";
     }
 
     @GetMapping("/searchMovie")
-    public String searchMovie() throws Exception {
+    public String searchMovie(@RequestParam(required = false) String query, @RequestParam(required = false) String query2, Model model) throws Exception {
         MovieInfoAPI movieInfoAPI = new MovieInfoAPI();
-        movieInfoAPI.searchMovie();
-        return "main";
+        if(StringUtils.isEmpty(query) && StringUtils.isEmpty(query2)) {}
+        else {
+            ArrayList<MovieDTO> movieList = movieInfoAPI.searchMovie(query, query2);
+            model.addAttribute("searchMovieList", movieList);
+            log.info(String.valueOf(movieList));
+        }
+        return "searchMovie";
     }
 }

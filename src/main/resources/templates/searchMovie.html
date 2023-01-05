@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="kr">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Box Office</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <section>
+        <form th:action="@{/movie/searchMovie}" method="get">
+            <div class="search">
+                <input type="text" name="query" value="">
+                <input type="text" name="query2" value="">
+                <button type="submit">검색</button>
+            </div>
+        </form>
+    </section>
+    <div class="container">
+        <div th:each="movie : ${searchMovieList}">
+            <div class="item" th:text="${movie.movieNm}"></div>
+            <a th:href="@{/movie/viewMovieInfo(movieCd = ${movie.movieCd})}">
+                <img id="imgId" th:src="${movie.image}"/>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
