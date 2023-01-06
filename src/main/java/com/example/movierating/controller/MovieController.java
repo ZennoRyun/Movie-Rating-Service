@@ -48,7 +48,6 @@ public class MovieController {
         else {
             ArrayList<MovieDTO> movieList = movieInfoAPI.searchMovie(query, query2);
             model.addAttribute("searchMovieList", movieList);
-            log.info(String.valueOf(movieList));
         }
         return "searchMovie";
     }

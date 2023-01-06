@@ -17,13 +17,14 @@ import java.util.Objects;
 public class NaverMovieSearchAPI {
 
     public String search(String query, String prdtYear) throws ParseException {
+        String movieNm = query;
         try { // 검색어 인코딩
             query = URLEncoder.encode(query, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException("검색어 인코딩 실패",e);
         }
         // URL 세팅
-        String apiURL = "https://openapi.naver.com/v1/search/movie?query=" + query;
+        String apiURL = "https://openapi.naver.com/v1/search/movie?query=" + query + "&display=100";
         Map<String, String> requestHeaders = new HashMap<>();
         requestHeaders.put("X-Naver-Client-Id", "dPLQ0H0Y4xXS9xSTlDMu");
         requestHeaders.put("X-Naver-Client-Secret", "PXTQZUHRYs");
@@ -31,17 +32,21 @@ public class NaverMovieSearchAPI {
         JSONParser parser = new JSONParser();
         JSONObject obj = (JSONObject)parser.parse(responseBody);
         JSONArray item = (JSONArray)obj.get("items");
-        JSONObject tmp = new JSONObject();
-        for(int i=0;i<item.size();i++) {
+        JSONObject tmp;
+        String image = "https://ssl.pstatic.net/static/movie/2012/06/dft_img203x290.png";
+
+        for (int i = 0; i < item.size(); i++) {
             tmp = (JSONObject) item.get(i);
-            if(prdtYear.equals(tmp.get("pubDate"))) {
+
+            if (Objects.equals(movieNm, tmp.get("title").toString().replace("<b>", "").replace("</b>", "")) && prdtYear.equals(tmp.get("pubDate"))) {
+                image = (String) tmp.get("image");
                 break;
             }
         }
-        String image = (String)tmp.get("image");
         if(Objects.equals(image, "")) {
-          image = "https://ssl.pstatic.net/static/movie/2012/06/dft_img203x290.png";
+            image = "https://ssl.pstatic.net/static/movie/2012/06/dft_img203x290.png";
         }
+
         return image;
     }
 

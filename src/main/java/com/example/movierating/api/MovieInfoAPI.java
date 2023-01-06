@@ -56,7 +56,7 @@ public class MovieInfoAPI {
         JSONObject movieInfoResult = (JSONObject) object.get("movieInfoResult");
         object = (JSONObject) movieInfoResult.get("movieInfo");
         JSONArray genresArr = (JSONArray) object.get("genres");
-        JSONObject object2 = new JSONObject();
+        JSONObject object2;
         if(genresArr.size()!=0) {
             object2 = (JSONObject) genresArr.get(0);
             genreNm = (String) object2.get("genreNm");
