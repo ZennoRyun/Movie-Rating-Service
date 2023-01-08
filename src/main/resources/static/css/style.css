@@ -3,7 +3,9 @@
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 	text-align: center;
 }
-
+.h1 {
+    text-align: center;
+}
 .star-rating {
   border:solid 1px #ccc;
   display:flex;
