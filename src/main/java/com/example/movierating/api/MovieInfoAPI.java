@@ -84,7 +84,7 @@ public class MovieInfoAPI {
         }
         // 네이버 영화 검색 API로 이미지 주소 받아오기
         NaverMovieSearchAPI naverMovieSearchAPI = new NaverMovieSearchAPI();
-        String image = naverMovieSearchAPI.search((String) object.get("movieNm"), (String) object.get("prdtYear"));
+        String image = naverMovieSearchAPI.search((String) object.get("movieNm"), directors, (String) object.get("prdtYear"));
 
         MovieDTO movie = MovieDTO.builder()
                 .movieCd((String) object.get("movieCd"))

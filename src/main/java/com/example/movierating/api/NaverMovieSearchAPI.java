@@ -16,7 +16,7 @@ import java.util.Objects;
 @Component
 public class NaverMovieSearchAPI {
 
-    public String search(String query, String prdtYear) throws ParseException {
+    public String search(String query, String directors, String prdtYear) throws ParseException {
         String movieNm = query;
         try { // 검색어 인코딩
             query = URLEncoder.encode(query, "UTF-8");
@@ -34,13 +34,29 @@ public class NaverMovieSearchAPI {
         JSONArray item = (JSONArray)obj.get("items");
         JSONObject tmp;
         String image = "https://ssl.pstatic.net/static/movie/2012/06/dft_img203x290.png";
-
+        String[] directorsArr = directors.split(", ");
         for (int i = 0; i < item.size(); i++) {
             tmp = (JSONObject) item.get(i);
 
-            if (Objects.equals(movieNm, tmp.get("title").toString().replace("<b>", "").replace("</b>", "")) && prdtYear.equals(tmp.get("pubDate"))) {
-                image = (String) tmp.get("image");
-                break;
+            if(!directors.equals("") && !Objects.equals(tmp.get("director").toString(), "")) {
+                String[] directorsArr2 = tmp.get("director").toString().substring(0, tmp.get("director").toString().length() - 1).split("[|]");
+                for (int j = 0; j < directorsArr.length; j++) {
+                    for (int k = 0; k < directorsArr2.length; k++) {
+                        if (Objects.equals(directorsArr[j], directorsArr2[k])) {
+                            image = (String) tmp.get("image");
+                            break;
+                        }
+                    }
+                }
+                if(prdtYear.equals(tmp.get("pubDate"))) {
+                    image = (String) tmp.get("image");
+                    break;
+                }
+            } else {
+                if(prdtYear.equals(tmp.get("pubDate"))) {
+                    image = (String) tmp.get("image");
+                    break;
+                }
             }
         }
         if(Objects.equals(image, "")) {

@@ -49,6 +49,7 @@ public class MovieController {
             ArrayList<MovieDTO> movieList = movieInfoAPI.searchMovie(query, query2);
             model.addAttribute("searchMovieList", movieList);
         }
+
         return "searchMovie";
     }
 }
