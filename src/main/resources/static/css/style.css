@@ -1,34 +1,6 @@
-*{padding:0;margin:0}
-li{list-style:none}
-a{text-decoration:none;font-size:14px}
-
-.menu {
-  width: 800px;
-  overflow: hidden;
-  margin: 0 auto;
-}
-
-.menu > li {
-  width: 20%; /*20*5=100%*/
-  float: left;
-  text-align: center;
-  line-height: 40px;
-  background-color: #5778ff;
-}
-
-.menu a {
-  color: #fff;
-}
-
-.menu > li:hover {
-  background-color: #94a9ff;
-  transition-duration: 0.5s;
-}
-
 .container {
 	display: grid;
-	grid-template-columns: 150px 150px 150px;
-	grid-template-rows: 150px 150px;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 	text-align: center;
 }
 

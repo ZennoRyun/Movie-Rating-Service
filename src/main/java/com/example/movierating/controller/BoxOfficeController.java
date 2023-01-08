@@ -17,7 +17,6 @@ import java.util.List;
 
 @Slf4j
 @Controller
-@RequestMapping("boxoffice")
 public class BoxOfficeController {
     @Autowired
     private BoxOfficeService boxOfficeService;
@@ -41,7 +40,7 @@ public class BoxOfficeController {
         }
     }
 
-    @GetMapping("/viewBoxOffice")
+    @GetMapping
     public String viewBoxOffice(Model model) throws Exception {
         List<BoxOfficeEntity> movieList = boxOfficeService.retrieveAll();
         model.addAttribute("dailyBoxOfficeArr", movieList);
