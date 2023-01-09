@@ -13,11 +13,13 @@
             <a class="navbar-brand" href="/">박스오피스</a>
         </div>
     </nav>
-    <form class="d-flex" role="search" th:action="@{/movie/searchMovie}" method="get">
-        <input class="form-control me-2" type="search" placeholder="제목명" aria-label="Search" name="query" value="">
-        <input class="form-control me-2" type="search" placeholder="감독명" aria-label="Search" name="query2" value="">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-    </form>
+    <div class="form-search">
+        <form class="d-flex" role="search" th:action="@{/movie/searchMovie}" method="get">
+            <input class="form-control me-2" type="search" placeholder="제목명" aria-label="Search" name="query" value="">
+            <input class="form-control me-2" type="search" placeholder="감독명" aria-label="Search" name="query2" value="">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+    </div>
     <div class="container">
         <div th:each="movie : ${searchMovieList}">
             <div class="card" style="width: 10rem;">
