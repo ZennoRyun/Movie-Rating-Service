@@ -56,10 +56,13 @@ public class MovieInfoAPI {
         JSONObject movieInfoResult = (JSONObject) object.get("movieInfoResult");
         object = (JSONObject) movieInfoResult.get("movieInfo");
         JSONArray genresArr = (JSONArray) object.get("genres");
-        JSONObject object2;
-        if(genresArr.size()!=0) {
-            object2 = (JSONObject) genresArr.get(0);
-            genreNm = (String) object2.get("genreNm");
+        for(int j=0;j<genresArr.size();j++) {
+            JSONObject object2 = (JSONObject) genresArr.get(j);
+            if (j!=0) {
+                genreNm = genreNm + ", " + object2.get("genreNm");
+            } else {
+                genreNm = genreNm + object2.get("genreNm");
+            }
         }
         JSONArray directorsArr = (JSONArray) object.get("directors");
         for(int j=0;j<directorsArr.size();j++) {
