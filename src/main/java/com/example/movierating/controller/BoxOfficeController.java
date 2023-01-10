@@ -20,7 +20,7 @@ public class BoxOfficeController {
     @Autowired
     private BoxOfficeService boxOfficeService;
 
-    @Scheduled(cron = "0 0 10 * * ?", zone = "Asia/Seoul") // 매일 오전 10시
+    @Scheduled(cron = "0 9 2 * * ?", zone = "Asia/Seoul") // 매일 오전 10시
     public void getBoxOffice() throws Exception {
         long now = System.currentTimeMillis() / 1000;
         log.info("schedule tasks using cron jobs - {}", now);

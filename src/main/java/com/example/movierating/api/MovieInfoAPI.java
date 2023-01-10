@@ -75,7 +75,7 @@ public class MovieInfoAPI {
         }
         JSONArray actorsArr = (JSONArray) object.get("actors");
         for(int j=0;j<actorsArr.size();j++) {
-            if(j==3) {
+            if(j==4) {
                 break;
             }
             JSONObject object3 = (JSONObject) actorsArr.get(j);
