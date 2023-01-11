@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Objects;
 
 @Slf4j
 @Component
@@ -46,6 +47,7 @@ public class MovieInfoAPI {
     }
 
     public MovieDTO getMovieInfo(String movieCd) throws Exception {
+        String openDt = "";
         String genreNm = "";
         String directors = "";
         String actors = "";
@@ -55,6 +57,16 @@ public class MovieInfoAPI {
         JSONObject object = (JSONObject) parser.parse(movieResponse);
         JSONObject movieInfoResult = (JSONObject) object.get("movieInfoResult");
         object = (JSONObject) movieInfoResult.get("movieInfo");
+
+        openDt = (String) object.get("openDt");
+        if(!Objects.equals(openDt, "")) {
+            StringBuffer sb = new StringBuffer();
+            sb.append(openDt);
+            sb.insert(6, ".");
+            sb.insert(4, ".");
+            openDt = String.valueOf(sb);
+        }
+
         JSONArray genresArr = (JSONArray) object.get("genres");
         for(int j=0;j<genresArr.size();j++) {
             JSONObject object2 = (JSONObject) genresArr.get(j);
@@ -64,6 +76,7 @@ public class MovieInfoAPI {
                 genreNm = genreNm + object2.get("genreNm");
             }
         }
+
         JSONArray directorsArr = (JSONArray) object.get("directors");
         for(int j=0;j<directorsArr.size();j++) {
             JSONObject object3 = (JSONObject) directorsArr.get(j);
@@ -73,6 +86,7 @@ public class MovieInfoAPI {
                 directors = directors + object3.get("peopleNm");
             }
         }
+
         JSONArray actorsArr = (JSONArray) object.get("actors");
         for(int j=0;j<actorsArr.size();j++) {
             if(j==4) {
@@ -92,7 +106,7 @@ public class MovieInfoAPI {
         MovieDTO movie = MovieDTO.builder()
                 .movieCd((String) object.get("movieCd"))
                 .movieNm((String) object.get("movieNm"))
-                .openDt((String) object.get("openDt"))
+                .openDt(openDt)
                 .genreNm(genreNm)
                 .directors(directors)
                 .actors(actors)

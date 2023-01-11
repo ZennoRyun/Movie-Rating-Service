@@ -24,24 +24,28 @@
     <div class="row featurette">
         <div class="col-md-2 order-md-4"></div>
         <div class="col-md-4 order-md-3">
-            <h2 class="featurette-heading fw-normal lh-1" th:text="${movie.movieNm}"></h2>
-            <p class="lead">Another featurette? Of course. More placeholder content here to give you an idea of how this layout would work with some actual real-world content in place.</p>
+            <br><h2 class="featurette-heading fw-normal lh-1" th:text="${movie.movieNm}"></h2>
+            <p class="lead" th:if="${movie.openDt == ''}">
+                <span th:text="${movie.openDt}"></span><br>
+                <span th:text="${movie.genreNm}"></span><br>
+                <span th:text="${movie.directors}"></span><br>
+                <span th:text="${movie.actors}"></span><br>
+                ⭐&nbsp<span th:text="${movie.rate}"></span><br>
+            </p>
+            <p class="lead" th:unless="${movie.openDt == ''}">
+                <span th:text="${movie.openDt}"></span>&nbsp개봉<br>
+                <span th:text="${movie.genreNm}"></span><br>
+                <span th:text="${movie.directors}"></span><br>
+                <span th:text="${movie.actors}"></span><br>
+                ⭐&nbsp<span th:text="${movie.rate}"></span><br>
+            </p>
         </div>
         <div class="col-md-4 order-md-2">
-            <img th:src="${movie.image}" class="rounded mx-auto d-block" height="230" width="160">
+            <img th:src="${movie.image}" class="rounded mx-auto d-block" height="260" width="182">
         </div>
         <div class="col-md-2 order-md-1"></div>
     </div>
     <hr class="featurette-divider">
-
-    <div class="item" th:text="${movie.movieNm}"></div>
-    <img id="imgId" th:src="${movie.image}" height="230" width="160"/>
-    <div class="item" th:text="${movie.openDt}"></div>
-    <div class="item" th:text="${movie.genreNm}"></div>
-    <div class="item" th:text="${movie.directors}"></div>
-    <div class="item" th:text="${movie.actors}"></div>
-    <div class="item" th:text="${movie.rate}"></div>
-
     <form th:action="@{/review/registerReview}" method="post">
         <div class="starpoint_wrap">
             <div class="starpoint_box">

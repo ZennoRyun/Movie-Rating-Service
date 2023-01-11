@@ -11,17 +11,6 @@
      padding-right: 400px;
 }
 
-.star-rating {
-  border:solid 1px #ccc;
-  display:flex;
-  flex-direction: row-reverse;
-  font-size:1.5em;
-  justify-content:space-around;
-  padding:0 .2em;
-  text-align:center;
-  width:5em;
-}
-
 .starpoint_wrap{display:inline-block;}
 .starpoint_box{position:relative;background:url(https://ido-archive.github.io/svc/etc/element/img/sp_star.png) 0 0 no-repeat;font-size:0;}
 .starpoint_box .starpoint_bg{display:block;position:absolute;top:0;left:0;height:18px;background:url(https://ido-archive.github.io/svc/etc/element/img/sp_star.png) 0 -20px no-repeat;pointer-events:none;}
@@ -48,26 +37,3 @@
 .starpoint_box .star_radio:nth-of-type(10):hover ~ .starpoint_bg,
 .starpoint_box .star_radio:nth-of-type(10):checked ~ .starpoint_bg{width:100%;}
 .blind{position:absolute;clip:rect(0 0 0 0);margin:-1px;width:1px;height: 1px;overflow:hidden;}
-
-.search {
-  width: 300px;
-  height: 100px;
-}
-.search input {
-  width: 80%;
-  height: 30px;
-  font-size: 18px;
-  border: none;
-  border-bottom: 1px black solid;
-}
-
-.search button {
-  font-size: 18px;
-  border: none;
-  background-color: green;
-  width: 50px;
-  height: 30px;
-  border-radius: 15px;
-  color: #fff;
-  cursor: pointer;
-}
