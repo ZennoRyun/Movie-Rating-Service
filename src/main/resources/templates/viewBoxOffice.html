@@ -10,11 +10,12 @@
 <body class="bg-body-tertiary">
     <nav class="navbar navbar-expand-lg bg-body-secondary">
         <div class="container-fluid">
-            <h1>오늘의 박스오피스</h1>
+            <h2>오늘의 박스오피스</h2>
             <a class="navbar-brand" href="/movie/searchMovie">영화 검색</a>
         </div>
     </nav>
-    <div class="container">
+    <div class="m-3"></div>
+    <div class="movie-list">
         <div th:each="movie : ${dailyBoxOfficeArr}">
             <div class="card" style="width: 10rem;">
                 <a th:href="@{/movie/viewMovieInfo(movieCd = ${movie.movieCd})}">

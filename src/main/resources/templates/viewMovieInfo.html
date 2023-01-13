@@ -20,64 +20,78 @@
             </ul>
         </div>
     </nav>
-    <div class="m-4"></div>
-    <div class="row featurette">
-        <div class="col-md-2 order-md-4"></div>
-        <div class="col-md-4 order-md-3">
-            <br><h2 class="featurette-heading fw-normal lh-1" th:text="${movie.movieNm}"></h2>
-            <p class="lead" th:if="${movie.openDt == ''}">
-                <span th:text="${movie.openDt}"></span><br>
-                <span th:text="${movie.genreNm}"></span><br>
-                <span th:text="${movie.directors}"></span><br>
-                <span th:text="${movie.actors}"></span><br>
-                ⭐&nbsp<span th:text="${movie.rate}"></span><br>
-            </p>
-            <p class="lead" th:unless="${movie.openDt == ''}">
-                <span th:text="${movie.openDt}"></span>&nbsp개봉<br>
-                <span th:text="${movie.genreNm}"></span><br>
-                <span th:text="${movie.directors}"></span><br>
-                <span th:text="${movie.actors}"></span><br>
-                ⭐&nbsp<span th:text="${movie.rate}"></span><br>
-            </p>
-        </div>
-        <div class="col-md-4 order-md-2">
-            <img th:src="${movie.image}" class="rounded mx-auto d-block" height="260" width="182">
-        </div>
-        <div class="col-md-2 order-md-1"></div>
-    </div>
-    <hr class="featurette-divider">
-    <form th:action="@{/review/registerReview}" method="post">
-        <div class="starpoint_wrap">
-            <div class="starpoint_box">
-                <label for="starpoint_1" class="label_star" title="0.5"><span class="blind">0.5점</span></label>
-                <label for="starpoint_2" class="label_star" title="1"><span class="blind">1점</span></label>
-                <label for="starpoint_3" class="label_star" title="1.5"><span class="blind">1.5점</span></label>
-                <label for="starpoint_4" class="label_star" title="2"><span class="blind">2점</span></label>
-                <label for="starpoint_5" class="label_star" title="2.5"><span class="blind">2.5점</span></label>
-                <label for="starpoint_6" class="label_star" title="3"><span class="blind">3점</span></label>
-                <label for="starpoint_7" class="label_star" title="3.5"><span class="blind">3.5점</span></label>
-                <label for="starpoint_8" class="label_star" title="4"><span class="blind">4점</span></label>
-                <label for="starpoint_9" class="label_star" title="4.5"><span class="blind">4.5점</span></label>
-                <label for="starpoint_10" class="label_star" title="5"><span class="blind">5점</span></label>
-                <input type="radio" th:field="${review.rate}" name="starpoint" id="starpoint_1" class="star_radio" value="0.5"/>
-                <input type="radio" th:field="${review.rate}" name="starpoint" id="starpoint_2" class="star_radio" value="1.0"/>
-                <input type="radio" th:field="${review.rate}" name="starpoint" id="starpoint_3" class="star_radio" value="1.5"/>
-                <input type="radio" th:field="${review.rate}" name="starpoint" id="starpoint_4" class="star_radio" value="2.0"/>
-                <input type="radio" th:field="${review.rate}" name="starpoint" id="starpoint_5" class="star_radio" value="2.5"/>
-                <input type="radio" th:field="${review.rate}" name="starpoint" id="starpoint_6" class="star_radio" value="3.0"/>
-                <input type="radio" th:field="${review.rate}" name="starpoint" id="starpoint_7" class="star_radio" value="3.5"/>
-                <input type="radio" th:field="${review.rate}" name="starpoint" id="starpoint_8" class="star_radio" value="4.0"/>
-                <input type="radio" th:field="${review.rate}" name="starpoint" id="starpoint_9" class="star_radio" value="4.5"/>
-                <input type="radio" th:field="${review.rate}" name="starpoint" id="starpoint_10" class="star_radio" value="5.0"/>
-                <span class="starpoint_bg"></span>
+    <div class="m-5"></div>
+    <div class="container">
+        <div class="row featurette">
+            <div class="col-md-6">
+                <div class="row featurette">
+                    <div class="offset-xs-1 col-md-11">
+                        <img th:src="${movie.image}" class="rounded mx-auto d-block" height="315" width="220">
+                    </div>
+                    <div class="m-4"></div>
+                    <div class="offset-md-3 col-md-9">
+                        <h2 class="featurette-heading fw-normal lh-1" th:text="${movie.movieNm}"></h2>
+                        <p class="lead" th:if="${movie.openDt == ''}">
+                            <span th:text="${movie.openDt}"></span><br>
+                            <span th:text="${movie.genreNm}"></span><br>
+                            <span th:text="${movie.directors}"></span><br>
+                            <span th:text="${movie.actors}"></span><br>
+                            ⭐&nbsp<span th:text="${movie.rate}"></span><br>
+                        </p>
+                        <p class="lead" th:unless="${movie.openDt == ''}">
+                            <span th:text="${movie.openDt}"></span>&nbsp개봉<br>
+                            <span th:text="${movie.genreNm}"></span><br>
+                            <span th:text="${movie.directors}"></span><br>
+                            <span th:text="${movie.actors}"></span><br>
+                            ⭐&nbsp<span th:text="${movie.rate}"></span><br>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row featurette">
+                    <div class="offset-md-2 col-md-10">
+
+                    </div>
+                    <div class="m-4"></div>
+                    <div class="offset-md-2 col-md-10">
+                        <form th:action="@{/review/registerReview}" method="post">
+                            <div class="starpoint_wrap">
+                                <div class="starpoint_box">
+                                    <label for="starpoint_1" class="label_star" title="0.5"><span class="blind">0.5점</span></label>
+                                    <label for="starpoint_2" class="label_star" title="1"><span class="blind">1점</span></label>
+                                    <label for="starpoint_3" class="label_star" title="1.5"><span class="blind">1.5점</span></label>
+                                    <label for="starpoint_4" class="label_star" title="2"><span class="blind">2점</span></label>
+                                    <label for="starpoint_5" class="label_star" title="2.5"><span class="blind">2.5점</span></label>
+                                    <label for="starpoint_6" class="label_star" title="3"><span class="blind">3점</span></label>
+                                    <label for="starpoint_7" class="label_star" title="3.5"><span class="blind">3.5점</span></label>
+                                    <label for="starpoint_8" class="label_star" title="4"><span class="blind">4점</span></label>
+                                    <label for="starpoint_9" class="label_star" title="4.5"><span class="blind">4.5점</span></label>
+                                    <label for="starpoint_10" class="label_star" title="5"><span class="blind">5점</span></label>
+                                    <input type="radio" th:field="${newReview.rate}" name="starpoint" id="starpoint_1" class="star_radio" value="0.5"/>
+                                    <input type="radio" th:field="${newReview.rate}" name="starpoint" id="starpoint_2" class="star_radio" value="1.0"/>
+                                    <input type="radio" th:field="${newReview.rate}" name="starpoint" id="starpoint_3" class="star_radio" value="1.5"/>
+                                    <input type="radio" th:field="${newReview.rate}" name="starpoint" id="starpoint_4" class="star_radio" value="2.0"/>
+                                    <input type="radio" th:field="${newReview.rate}" name="starpoint" id="starpoint_5" class="star_radio" value="2.5"/>
+                                    <input type="radio" th:field="${newReview.rate}" name="starpoint" id="starpoint_6" class="star_radio" value="3.0"/>
+                                    <input type="radio" th:field="${newReview.rate}" name="starpoint" id="starpoint_7" class="star_radio" value="3.5"/>
+                                    <input type="radio" th:field="${newReview.rate}" name="starpoint" id="starpoint_8" class="star_radio" value="4.0"/>
+                                    <input type="radio" th:field="${newReview.rate}" name="starpoint" id="starpoint_9" class="star_radio" value="4.5"/>
+                                    <input type="radio" th:field="${newReview.rate}" name="starpoint" id="starpoint_10" class="star_radio" value="5.0"/>
+                                    <span class="starpoint_bg"></span>
+                                </div>
+                            </div>
+                            <div>
+                                <textarea name="content" id="content" cols="30" rows="10" th:text="${newReview.content}" placeholder="내용"></textarea>
+                                <input type="hidden" id="movieCd" name="movieCd" th:value="${movie.movieCd}"/>
+                                <button type="submit">등록</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
-        <div>
-            <textarea name="content" id="content" cols="30" rows="10" th:text="${review.content}" placeholder="내용"></textarea>
-            <input type="hidden" id="movieCd" name="movieCd" th:value="${movie.movieCd}"/>
-            <button type="submit">등록</button>
-        </div>
-    </form>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
