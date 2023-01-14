@@ -52,6 +52,7 @@
             <div class="col-md-6">
                 <div class="row featurette">
                     <div class="offset-xs-1 col-md-10">
+                        <h5><strong>리뷰(<span th:text="${#lists.size(reviewList)}"></span>)</strong></h5>
                         <div class="review-list">
                             <div th:each="review : ${reviewList}">
                                 <p class="lead">
