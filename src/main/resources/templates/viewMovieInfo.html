@@ -53,16 +53,12 @@
                 <div class="row featurette">
                     <div class="offset-xs-1 col-md-10">
                         <div class="review-list">
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Enim modi in
-                            exercitationem explicabo, at rem officia autem non porro soluta dolorum
-                            officiis ipsa repellat, laudantium ea unde labore, temporibus quas?Lorem
-                            ipsum dolor sit amet, consectetur adipisicing elit. Eveniet eius totam
-                            quam pariatur ratione, in voluptatem dignissimos laboriosam sint aut!
-                            Repudiandae consectetur odit quo corrupti quidem perferendis aut dolores
-                            quis?Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat nam
-                            optio dolore recusandae fuga voluptatibus. Ea quam deserunt consectetur
-                            quo aut eligendi, molestiae incidunt molestias ullam? Repellendus ratione
-                            repellatas
+                            <div th:each="review : ${reviewList}">
+                                <p class="lead">
+                                    <div>⭐&nbsp<span th:text="${review.rate}"></span></div>
+                                    <div class="review-content" th:text="${review.content}"></div>
+                                </p>
+                            </div>
                         </div>
                     </div>
                     <div class="m-4"></div>

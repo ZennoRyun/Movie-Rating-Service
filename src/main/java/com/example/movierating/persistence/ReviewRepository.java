@@ -6,8 +6,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface ReviewRepository extends JpaRepository<ReviewEntity, Long> {
+    List<ReviewEntity> findByMovieCd(String movieCd);
+
     @Query(value = "SELECT AVG(RATE) FROM REVIEW WHERE MOVIE_CD = :movieCd", nativeQuery = true)
     Double retrieveRateAvg(@Param("movieCd") String movieCd);
 }
