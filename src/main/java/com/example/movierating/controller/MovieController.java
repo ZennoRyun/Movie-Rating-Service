@@ -2,7 +2,6 @@ package com.example.movierating.controller;
 
 import com.example.movierating.api.MovieInfoAPI;
 import com.example.movierating.dto.MovieDTO;
-import com.example.movierating.entity.BoxOfficeEntity;
 import com.example.movierating.entity.MovieEntity;
 import com.example.movierating.entity.ReviewEntity;
 import com.example.movierating.service.MovieService;
