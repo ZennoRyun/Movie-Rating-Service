@@ -35,15 +35,15 @@
                         <p class="lead" th:if="${movie.openDt == ''}">
                             <span th:text="${movie.openDt}"></span><br>
                             <span th:text="${movie.genreNm}"></span><br>
-                            <span th:text="${movie.directors}"></span><br>
-                            <span th:text="${movie.actors}"></span><br>
+                            감독&nbsp:&nbsp<span th:text="${movie.directors}"></span><br>
+                            출연&nbsp:&nbsp<span th:text="${movie.actors}"></span><br>
                             ⭐&nbsp<span th:text="${movie.rate}"></span><br>
                         </p>
                         <p class="lead" th:unless="${movie.openDt == ''}">
                             <span th:text="${movie.openDt}"></span>&nbsp개봉<br>
                             <span th:text="${movie.genreNm}"></span><br>
-                            <span th:text="${movie.directors}"></span><br>
-                            <span th:text="${movie.actors}"></span><br>
+                            감독&nbsp:&nbsp<span th:text="${movie.directors}"></span><br>
+                            출연&nbsp:&nbsp<span th:text="${movie.actors}"></span><br>
                             ⭐&nbsp<span th:text="${movie.rate}"></span><br>
                         </p>
                     </div>
