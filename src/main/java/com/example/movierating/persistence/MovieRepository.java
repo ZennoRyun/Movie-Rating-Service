@@ -12,6 +12,6 @@ import javax.transaction.Transactional;
 public interface MovieRepository extends JpaRepository<MovieEntity, String> {
     @Modifying
     @Transactional
-    @Query(value = "UPDATE MOVIE SET RATE = :rate WHERE MOVIE_CD = :movieCd", nativeQuery = true)
+    @Query(value = "UPDATE movie SET RATE = :rate WHERE MOVIE_CD = :movieCd", nativeQuery = true)
     void updateRate(@Param("movieCd") String movieCd, @Param("rate") Double rate);
 }

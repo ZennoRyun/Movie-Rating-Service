@@ -12,6 +12,6 @@ import java.util.List;
 public interface ReviewRepository extends JpaRepository<ReviewEntity, Long> {
     List<ReviewEntity> findByMovieCd(String movieCd);
 
-    @Query(value = "SELECT AVG(RATE) FROM REVIEW WHERE MOVIE_CD = :movieCd", nativeQuery = true)
+    @Query(value = "SELECT AVG(RATE) FROM review WHERE MOVIE_CD = :movieCd", nativeQuery = true)
     Double retrieveRateAvg(@Param("movieCd") String movieCd);
 }
