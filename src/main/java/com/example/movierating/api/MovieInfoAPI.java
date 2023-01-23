@@ -2,7 +2,6 @@ package com.example.movierating.api;
 
 import com.example.movierating.dto.MovieDTO;
 import kr.or.kobis.kobisopenapi.consumer.rest.KobisOpenAPIRestService;
-import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -12,7 +11,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Objects;
 
-@Slf4j
 @Component
 public class MovieInfoAPI {
     //영화진흥원 API 발급키

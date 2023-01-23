@@ -6,7 +6,6 @@ import com.example.movierating.entity.MovieEntity;
 import com.example.movierating.entity.ReviewEntity;
 import com.example.movierating.service.MovieService;
 import com.example.movierating.service.ReviewService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Slf4j
 @Controller
 @RequestMapping("movie")
 public class MovieController {

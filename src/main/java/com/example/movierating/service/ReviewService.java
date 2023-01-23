@@ -14,7 +14,7 @@ public class ReviewService {
     private ReviewRepository reviewRepository;
 
     public void registerReview(ReviewEntity entity) {
-        log.info("Entity Cd : {} is saved.", entity.getId());
+        log.info("Entity Id : {} is saved.", entity.getId());
         reviewRepository.save(entity);
     }
 
