@@ -8,7 +8,7 @@
 
 ## 📋 Project Description
 - 스프링부트로 서버 구축
-- 영화진흥위원회 오픈 API에서 영화 정보, 네이버 영화 오픈 API에서 영화 포스터를 REST 방식으로 가져옴
+- 영화진흥위원회 오픈 API에서 박스오피스/영화 정보/영화 검색 결과, 네이버 영화 오픈 API에서 영화 포스터를 REST 방식으로 가져옴
 - Scheduler를 사용하여 간헐적으로 영화 API를 호출 -> 성능 향상
 - Thymeleaf 뷰 템플릿 사용
 - Transaction 설정
@@ -21,7 +21,7 @@
 <br>
 
 ## :scroll: DFD(Data Flow Diagram)
-![DFD](https://user-images.githubusercontent.com/81897623/215116872-7efbbdd9-c0f2-4a77-9c74-c832693ab6c0.PNG)
+![DFD](https://user-images.githubusercontent.com/81897623/215153127-b6bc1663-1233-46f6-9e8b-f86c3ed9ac89.PNG)
 <br>
 
 ## :camera: Screenshot
@@ -31,8 +31,8 @@
 ### 영화 검색
 ![영화 검색](https://user-images.githubusercontent.com/81897623/215108405-c454326d-8ea9-4297-9a6d-425ef480e9d1.PNG)
 <br>
-### 영화 정보, 리뷰
-![영화 정보, 리뷰](https://user-images.githubusercontent.com/81897623/215107820-52af002b-f1a2-42e9-999f-31631872c9bf.PNG)
+### 영화 정보 및 리뷰
+![영화 정보 및 리뷰](https://user-images.githubusercontent.com/81897623/215153426-8adfe2bd-2634-45b4-86b3-3bb38046d550.png)
 <br>
 
 ## :running: Run server
