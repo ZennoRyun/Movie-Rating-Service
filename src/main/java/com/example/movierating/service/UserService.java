@@ -15,20 +15,20 @@ public class UserService {
     private UserRepository userRepository;
 
     public UserEntity create(final UserEntity userEntity) {
-        if(userEntity == null || userEntity.getEmail() == null ) {
+        if(userEntity == null || userEntity.getUserid() == null ) {
             throw new RuntimeException("Invalid arguments");
         }
-        final String email = userEntity.getEmail();
-        if(userRepository.existsByEmail(email)) {
-            log.warn("Email already exists {}", email);
-            throw new RuntimeException("Email already exists");
+        final String userid = userEntity.getUserid();
+        if(userRepository.existsByUserid(userid)) {
+            log.warn("Userid already exists {}", userid);
+            throw new RuntimeException("Userid already exists");
         }
 
         return userRepository.save(userEntity);
     }
 
-    public UserEntity getByCredentials(final String email, final String password, final PasswordEncoder encoder) {
-        final UserEntity originalUser = userRepository.findByEmail(email);
+    public UserEntity getByCredentials(final String userid, final String password, final PasswordEncoder encoder) {
+        final UserEntity originalUser = userRepository.findByUserid(userid);
 
         // matches 메서드를 이용해 패스워드가 같은지 확인
         if(originalUser != null && encoder.matches(password, originalUser.getPassword())) {
