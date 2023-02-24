@@ -18,6 +18,7 @@ public class ReviewDTO {
     private Double rate;
     private String content;
     private LocalDateTime regDate;
+    private String writer;
 
     public ReviewDTO(final ReviewEntity entity) {
         this.id = entity.getId();
@@ -25,6 +26,7 @@ public class ReviewDTO {
         this.rate = entity.getRate();
         this.content = entity.getContent();
         this.regDate = entity.getRegDate();
+        this.writer = entity.getWriter();
     }
 
     public static ReviewEntity toEntity(final ReviewDTO dto) {
@@ -34,6 +36,7 @@ public class ReviewDTO {
                 .rate(dto.getRate())
                 .content(dto.getContent())
                 .regDate(dto.getRegDate())
+                .writer(dto.getWriter())
                 .build();
     }
 }

@@ -1,7 +1,3 @@
-.navbar-expand-lg bg-body-secondary {
-    height: 30px;
-}
-
 .movie-list {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;

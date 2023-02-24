@@ -5,6 +5,7 @@ import com.example.movierating.entity.ReviewEntity;
 import com.example.movierating.service.MovieService;
 import com.example.movierating.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +22,8 @@ public class ReviewController {
     private MovieService movieService;
 
     @PostMapping("/registerReview")
-    public RedirectView registerReview(ReviewDTO dto, RedirectAttributes re) {
+    public RedirectView registerReview(@AuthenticationPrincipal String userId, ReviewDTO dto, RedirectAttributes re) {
+        dto.setWriter(userId);
         ReviewEntity entity = ReviewDTO.toEntity(dto);
         reviewService.registerReview(entity);
         String movieCd = dto.getMovieCd();

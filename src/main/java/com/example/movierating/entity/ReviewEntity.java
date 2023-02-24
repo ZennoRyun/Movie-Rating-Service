@@ -24,4 +24,5 @@ public class ReviewEntity {
     private String content;
     @CreationTimestamp
     private LocalDateTime regDate;
+    private String writer;
 }
