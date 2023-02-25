@@ -1,9 +1,13 @@
+.wrapper {
+    padding: 10px 450px;
+}
+
 .movie-list {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 	text-align: center;
 	justify-items: center;
-	row-gap: 15px
+	row-gap: 15px;
 }
 
 .form-search {

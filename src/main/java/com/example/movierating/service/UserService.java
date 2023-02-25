@@ -2,38 +2,29 @@ package com.example.movierating.service;
 
 import com.example.movierating.entity.UserEntity;
 import com.example.movierating.persistence.UserRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-@Slf4j
+@RequiredArgsConstructor
 @Service
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    public UserEntity create(final UserEntity userEntity) {
-        if(userEntity == null || userEntity.getUserid() == null ) {
-            throw new RuntimeException("Invalid arguments");
-        }
-        final String userid = userEntity.getUserid();
-        if(userRepository.existsByUserid(userid)) {
-            log.warn("Userid already exists {}", userid);
-            throw new RuntimeException("Userid already exists");
-        }
+    private final PasswordEncoder passwordEncoder;
 
-        return userRepository.save(userEntity);
-    }
 
-    public UserEntity getByCredentials(final String userid, final String password, final PasswordEncoder encoder) {
-        final UserEntity originalUser = userRepository.findByUserid(userid);
+    public UserEntity create(String username, String email, String password) {
+        UserEntity user = new UserEntity();
+        user.setUsername(username);
+        user.setEmail(email);
+        user.setPassword(passwordEncoder.encode(password));
+        this.userRepository.save(user);
 
-        // matches 메서드를 이용해 패스워드가 같은지 확인
-        if(originalUser != null && encoder.matches(password, originalUser.getPassword())) {
-            return originalUser;
-        }
-        return null;
+        return user;
     }
 }
