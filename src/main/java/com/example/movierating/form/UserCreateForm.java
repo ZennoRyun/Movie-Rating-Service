@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 @Getter
 @Setter
 public class UserCreateForm {
-    @Size(min = 3, max = 25)
+    @Size(min = 3, max = 25, message = "아이디의 길이는 3자 이상 25자 이하여야 합니다.")
     @NotEmpty(message = "사용자ID는 필수항목입니다.")
     private String username;
 

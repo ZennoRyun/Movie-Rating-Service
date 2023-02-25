@@ -1,10 +1,13 @@
 package com.example.movierating.dto;
 
 import com.example.movierating.entity.ReviewEntity;
+import com.example.movierating.entity.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
 @Builder
@@ -18,7 +21,8 @@ public class ReviewDTO {
     private Double rate;
     private String content;
     private LocalDateTime regDate;
-    private String writer;
+
+    private UserEntity author;
 
     public ReviewDTO(final ReviewEntity entity) {
         this.id = entity.getId();
@@ -26,7 +30,7 @@ public class ReviewDTO {
         this.rate = entity.getRate();
         this.content = entity.getContent();
         this.regDate = entity.getRegDate();
-        this.writer = entity.getWriter();
+        this.author = entity.getAuthor();
     }
 
     public static ReviewEntity toEntity(final ReviewDTO dto) {
@@ -36,7 +40,7 @@ public class ReviewDTO {
                 .rate(dto.getRate())
                 .content(dto.getContent())
                 .regDate(dto.getRegDate())
-                .writer(dto.getWriter())
+                .author(dto.getAuthor())
                 .build();
     }
 }

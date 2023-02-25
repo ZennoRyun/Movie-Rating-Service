@@ -19,10 +19,16 @@ public class ReviewEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String movieCd;
+
     private Double rate;
+
     private String content;
+
     @CreationTimestamp
     private LocalDateTime regDate;
-    private String writer;
+
+    @ManyToOne
+    private UserEntity author;
 }

@@ -1,7 +1,9 @@
-.wrapper {
-    padding: 10px 450px;
+.signupFormWrapper {
+    padding: 10px 550px;
 }
-
+.signinFormWrapper {
+    padding: 10px 600px;
+}
 .movie-list {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;

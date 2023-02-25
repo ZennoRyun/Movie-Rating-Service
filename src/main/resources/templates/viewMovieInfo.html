@@ -63,12 +63,15 @@
                                 <p class="lead">
                                     <div>⭐&nbsp<span th:text="${review.rate}"></span></div>
                                     <div class="review-content" th:text="${review.content}"></div>
+                                    <div class="m-1"></div>
+                                    <div th:text="${review.author.username}" style="color: #808080; font-size: 0.9em;"></div>
+
                                 </p>
                             </div>
                         </div>
                     </div>
                     <div class="m-4"></div>
-                    <div class="offset-xs-1 col-md-10">
+                    <div class="offset-xs-1 col-md-10" sec:authorize="isAuthenticated()">
                         <form th:action="@{/review/registerReview}" method="post">
                             <div class="form-group">
                                 <h5><strong>리뷰 작성</strong></h5>
