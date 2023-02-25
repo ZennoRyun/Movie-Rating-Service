@@ -4,12 +4,8 @@ import com.example.movierating.entity.UserEntity;
 import com.example.movierating.exception.DataNotFoundException;
 import com.example.movierating.persistence.UserRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.Optional;
 
 @RequiredArgsConstructor

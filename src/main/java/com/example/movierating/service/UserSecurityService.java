@@ -3,7 +3,6 @@ package com.example.movierating.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import com.example.movierating.entity.UserEntity;
 import com.example.movierating.persistence.UserRepository;
 import com.example.movierating.role.UserRole;
@@ -14,7 +13,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -36,6 +34,7 @@ public class UserSecurityService implements UserDetailsService {
         } else {
             authorities.add(new SimpleGrantedAuthority(UserRole.USER.getValue()));
         }
+
         return new User(user.getUsername(), user.getPassword(), authorities);
     }
 }

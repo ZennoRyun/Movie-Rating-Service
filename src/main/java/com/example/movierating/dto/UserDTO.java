@@ -1,16 +1,10 @@
 package com.example.movierating.dto;
 
-import com.example.movierating.entity.ReviewEntity;
 import com.example.movierating.entity.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 @Data
 @Builder
