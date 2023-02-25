@@ -23,6 +23,7 @@
             </div>
             <a class="navbar-brand" sec:authorize="isAnonymous()" th:href="@{/user/signin}">로그인</a>
             <a class="navbar-brand" sec:authorize="isAuthenticated()" th:href="@{/user/signout}">로그아웃</a>
+            <a class="navbar-brand" sec:authorize="isAnonymous()" href="/user/signup">회원가입</a>
         </div>
     </nav>
     <div class="m-5"></div>
