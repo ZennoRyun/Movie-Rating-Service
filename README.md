@@ -12,6 +12,7 @@
 - Scheduler를 사용하여 간헐적으로 영화 API를 호출 -> 성능 향상
 - Thymeleaf 뷰 템플릿 사용
 - Transaction 설정
+- Spring Security를 활용한 회원가입/로그인/로그아웃 구현
 - 박스오피스/영화 정보/영화 검색 구현
 - 리뷰(조회/작성) 구현
 <br>
@@ -25,14 +26,20 @@
 <br>
 
 ## :camera: Screenshot
+### 회원가입
+![회원가입](https://user-images.githubusercontent.com/81897623/221391810-9ad2e8fe-60f4-45bd-81f3-0d356d9672e7.png)
+<br>
+### 로그인
+![로그인](https://user-images.githubusercontent.com/81897623/221391827-e02b7359-820e-42c4-a0d3-9fb7d629f851.png)
+<br>
 ### 박스오피스
-![박스오피스](https://user-images.githubusercontent.com/81897623/215107782-d43bb925-749f-45be-bdae-25db468404c5.PNG)
+![박스오피스](https://user-images.githubusercontent.com/81897623/221391773-27808c3e-3d2a-472f-aad3-10464de4ee38.png)
 <br>
 ### 영화 검색
-![영화 검색](https://user-images.githubusercontent.com/81897623/215108405-c454326d-8ea9-4297-9a6d-425ef480e9d1.PNG)
+![영화 검색](https://user-images.githubusercontent.com/81897623/221391795-6243354d-4ee4-463f-9f55-f0c89b4a7c45.png)
 <br>
 ### 영화 정보 및 리뷰
-![영화 정보 및 리뷰](https://user-images.githubusercontent.com/81897623/215153426-8adfe2bd-2634-45b4-86b3-3bb38046d550.png)
+![영화 정보 및 리뷰](https://user-images.githubusercontent.com/81897623/221391783-94c453d0-8b25-4d6c-9b76-61d3ca551ff8.png)
 <br>
 
 ## :running: Run server
